@@ -79,6 +79,15 @@ You can add rows on the server side, this plugin will not clobber them.
        
         // [Optional] This is the class that has the # of the row.
         qtyRow: ".service-qty-number",
+
+        // [Optional] Callbacks when an element is ready.
+        inputBoxReady: {
+            nickname: function($nickname) {
+                $nickname.on('change', function() {
+                    console.log($(this).val();
+                });
+            }
+        }
     });
 	```
 
@@ -109,3 +118,5 @@ Contains a simple HTML file to demonstrate the plugin.
 ## License
 
 Software is licensed under the `MIT License`.
+
+© [Vonex](https://www.vonex.com.au), 2016

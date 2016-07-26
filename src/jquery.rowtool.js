@@ -25,8 +25,9 @@
             template: null,
             htmlTemplate: null,
             updateTemplate: null,
-            inputBoxes: [],
             groupName: null,
+            inputBoxes: [],
+            inputBoxReady: null,
         };
 
     // The actual plugin constructor
@@ -142,13 +143,21 @@
                     $line.find($lineNumber).html($number);
                 }
 
+                var boxReady = that.settings.inputBoxReady;
+                var runBoxReady = (typeof that.settings.inputBoxReady === "object" && that.settings.inputBoxReady !== null);
+
                 selectBoxes.forEach(function (element, index) {
                     var templateName = 'name="' + that.settings.groupName + '[][' + element + ']"';
                     var correctName = that.settings.groupName + '[' + $number + '][' + element + ']';
 
                     var $input = $line.find('input[' + templateName + ']');
                     $line.find('input[' + templateName + ']').attr('name', correctName);
-                    //$input.mask($input.data('mask'));
+
+                    if (runBoxReady) {
+                        if (element in boxReady && boxReady[element] instanceof Function) {
+                            boxReady[element].call(that.element, $input);
+                        }
+                    }
                 });
             }
 
