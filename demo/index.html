@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Dynamic rows with rowTool</title>
+		<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+		<script src="../src/jquery.boilerplate.js"></script>
+	</head>
+	<body>
+		<div id="example">
+            <!-- this is how many rows you want. -->
+            <input id="service-qty" name="service-qty" type="number" value="0" min="0" max="99" aria-valuemin="1">
+
+            <!-- this is the template for the dynamically added rows -->
+            <script type="html/service-template" name="service-template">
+                <tr class="service">
+                    <td class="service-qty-number">1</td>
+                    <td><input type="text" name="service[][nickname]" placeholder="Nicky"></td>
+                    <td><input type="text" name="service[][firstname]" placeholder="Nicholas"></td>
+                    <td><input type="text" name="service[][lastname]" placeholder="Jonas"></td>
+                </tr>
+            </script>
+
+            <!-- and this is where we will put all the rows -->
+            <table class="services">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nick name</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+		</div>
+		<script>
+            $(".services").rowTool({
+                groupName: 'service',
+                qtyInput: $("#service-qty"),
+                qtyRow: ".service-qty-number",
+                template: $('script[type="html/service-template"][name="service-template"]'),
+                inputBoxes: ['nickname', 'firstname', 'lastname'],
+                updateTemplate: function($row) {
+                    // Here, add handlers like click or change.
+                    // this points to the table you ran rowTool on.
+                    // $row is the <tr>.
+                    //
+                    // You probably want to do something like:
+                    //
+                    //      $row.find('input').mask();
+                }
+            });
+        </script>
+	</body>
+</html>
