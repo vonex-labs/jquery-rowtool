@@ -81,8 +81,10 @@ You can add rows on the server side, this plugin will not clobber them.
         qtyRow: ".service-qty-number",
 
         // [Optional] Callbacks when an element is ready.
+        //  First parameter is the input box
+        //  Second parameter is the row that the input box is on
         inputBoxReady: {
-            nickname: function($nickname) {
+            nickname: function($nickname, $row) {
                 $nickname.on('change', function() {
                     console.log($(this).val();
                 });

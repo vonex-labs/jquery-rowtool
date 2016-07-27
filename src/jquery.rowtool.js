@@ -155,7 +155,7 @@
 
                     if (runBoxReady) {
                         if (element in boxReady && boxReady[element] instanceof Function) {
-                            boxReady[element].call(that.element, $input);
+                            boxReady[element].call(that.element, $input, $line);
                         }
                     }
                 });
